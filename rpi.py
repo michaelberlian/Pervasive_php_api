@@ -24,35 +24,37 @@ Sign in / Sign up:
 input:
     """)
     getInput = int(input())
-    if (getInput == 1){
+    if (getInput == 1):
         username = input("username: ")
         password = input("password: ")
         url = 'http://18.140.7.137/Pervasive_php_api/api/user/read_single.php?username=' + username
         password_real = requests.get(url).json()['password']
-        if (password == password_real){
+        if (password == password_real):
             user_id = requests.get(url).json()['id']
-        }
-        else {
+            print ('your id is ', user_id)
+            break
+        else :
             print("wrong password")
-        }
-    } elif (getInput == 2){
+    elif (getInput == 2):
         username = input("username: ")
         password = input("password: ")
         url = 'http://18.140.7.137/Pervasive_php_api/api/user/create.php'
         headers = {'Content-type': 'application/Json'}
-        myobj = """{
-                        "username":"{username}",
-                        "password":"{password}"
-                    }""".format(username,password)
+        myobj = """{{
+                        "username":"{}",
+                        "password":"{}"
+                    }}""".format(username,password)
         userCreateRequests = requests.get(url, headers=headers, data = myobj)
         print(userCreateRequests.json()['message'])
         url = 'http://18.140.7.137/Pervasive_php_api/api/user/read_single.php?username=' + username
-        userId = requests.get(url).json()['id']
-        print ('your id is ', userId)
-    } elif (getInput == 3){
-        break;
-    }
+        user_id = requests.get(url).json()['id']
+        print ('your id is ', user_id)
+        break
+    elif (getInput == 3):
+        exit()
 
+print("bye")
+exit()
 #Smart Lights local IP address
 light = wizlight("192.168.100.10")
 light2 = wizlight("192.168.100.11")
