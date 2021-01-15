@@ -37,6 +37,13 @@ input:
         if (password == password_real):
             user_id = requests.get(url).json()['id']
             print ('your id is ', user_id)
+
+            #get settings
+            url = 'http://18.140.7.137/Pervasive_php_api/api/setting/read_single.php?id=' + user_id
+            data = requests.get(url).json()
+            brightness = data['brightness']
+            switch = data['switch']
+
             break
         else :
             print("wrong password")
@@ -68,6 +75,18 @@ input:
             user_id = requests.get(url).json()['id']
 
             print ('your id is ', user_id)
+
+            #create the setting for new user
+            url = 'http://18.140.7.137/Pervasive_php_api/api/setting/create.php'\
+            headers = {'Content-type': 'application/Json'}
+            myobj = """{{
+                "id":{}
+                "brightness":"255",
+                "switch":"on"
+            }}""".format(user_id)
+            data = requests.get(url, headers=headers, data = myobj).json()
+            print (data['message'])
+
             break
         #username used
         else :
@@ -82,9 +101,9 @@ exit()
 light = wizlight("192.168.100.10")
 light2 = wizlight("192.168.100.11")
 
-brightness = 255
+# brightness = 255
 lamp_state = False
-function_state = True
+# function_state = True
 turn = False
 
 def button1_callback(channel):
