@@ -2,7 +2,7 @@
     class Database {
         // params
         private $host = 'localhost';
-        private $db_name = 'testing_api';
+        private $db_name = 'fp_api';
         private $username = 'root';
         private $password = '';
         private $conn;
@@ -22,4 +22,4 @@
             return $this->conn;
         }
     }
-?>z
+?>
