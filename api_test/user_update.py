@@ -5,8 +5,8 @@ print (url)
 headers = {'Content-type': 'application/Json'}
 myobj = """{
     "id":"1",
-    "username":"marcell",
-    "password":"marcell111"
+    "username":"kevin",
+    "password":"kevin123"
 }"""
 
 x = requests.post(url, headers=headers, data = myobj)

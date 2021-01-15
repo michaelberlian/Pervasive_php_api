@@ -21,7 +21,9 @@ while True:
 Sign in / Sign up:
     1. Sign in 
     2. Sign up
-    3. exit    
+    3. Change password
+    4. Delete account
+    5. exit    
 input:
     """)
     getInput = int(input())
@@ -91,8 +93,72 @@ input:
         #username used
         else :
             print ("username has been used")
-    #exit
+    #change password
     elif (getInput == 3):
+        #get input
+        username = input("username: ")
+        password = input("password: ")
+
+        #compare to db
+        url = 'http://18.140.7.137/Pervasive_php_api/api/user/read_single.php?username=' + username
+        password_real = requests.get(url).json()['password']
+
+        #verification true
+        if (password == password_real):
+            user_id = requests.get(url).json()['id']
+
+            #setup the update
+            new_password = input("new password: ")
+            url = 'http://18.140.7.137/Pervasive_php_api/api/user/delete.php'
+            headers = {'Content-type': 'application/Json'}
+            myobj = """{{
+                "id":"{}"
+                "username":"{}"
+                "password":"{}"
+            }}""".format(user_id, username, new_password)
+            data = requests.post(url, headers=headers, data = myobj).json()
+            print (data['message'])
+            break
+        else :
+            print ("verification failed")
+
+    #delete accound
+    elif (getInput == 4):
+        #get input
+        username = input("username: ")
+        password = input("password: ")
+
+        #compare to db
+        url = 'http://18.140.7.137/Pervasive_php_api/api/user/read_single.php?username=' + username
+        password_real = requests.get(url).json()['password']
+
+        #verification true
+        if (password == password_real):
+            user_id = requests.get(url).json()['id']
+
+            #delete the user
+            url = 'http://18.140.7.137/Pervasive_php_api/api/user/delete.php'
+            headers = {'Content-type': 'application/Json'}
+            myobj = """{{
+                "id":"{}"
+            }}""".format(user_id)
+            data = requests.post(url, headers=headers, data = myobj).json()
+            print (data['message'])
+
+
+            url = 'http://18.140.7.137/Pervasive_php_api/api/setting/delete.php'
+            headers = {'Content-type': 'application/Json'}
+            myobj = """{{
+                "id":"{}"
+            }}""".format(user_id)
+            data = requests.post(url, headers=headers, data = myobj).json()
+            print (data['message'])
+
+            break
+        else :
+            print ("verification failed")
+    #exit
+    elif (getInput == 5):
         exit()
 
 print("bye")

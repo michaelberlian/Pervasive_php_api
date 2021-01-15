@@ -9,4 +9,4 @@ myobj = """{
 
 x = requests.post(url, headers=headers, data = myobj)
 data = x.json()
-print(data)
+print(data['message'])
