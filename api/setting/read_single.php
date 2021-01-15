@@ -22,8 +22,8 @@
   // Create array
   $setting_arr = array(
     'id' => $setting->id,
-    'switch' => $setting->switch,
-    'function' => $setting->function
+    'brightness' => $setting->brightness,
+    'switch' => $setting->switch
   );
 
   // Make JSON

@@ -15,7 +15,7 @@
   // Instantiate setting object
   $setting = new Setting($db);
 
-  // Get raw posted data
+  // Get setting data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
@@ -24,10 +24,10 @@
   // Delete setting
   if($setting->delete()) {
     echo json_encode(
-      array('message' => 'Post Deleted')
+      array('message' => 'setting Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'Post Not Deleted')
+      array('message' => 'setting Not Deleted')
     );
   }

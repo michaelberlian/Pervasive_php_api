@@ -82,7 +82,8 @@
     public function update() {
           // Create query
           $query = 'UPDATE ' . $this->table . '
-                                SET brightness = :brightness, switch = :switch WHERE id = :id';
+                                SET brightness = :brightness, switch = :switch
+                                WHERE id =:id';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);

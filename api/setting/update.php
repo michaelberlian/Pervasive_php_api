@@ -22,7 +22,7 @@
   $setting->id = $data->id;
 
   $setting->brightness = $data->brightness;
-  $setting->function = $data->function;
+  $setting->switch = $data->switch;
 
   // Update setting
   if($setting->update()) {
