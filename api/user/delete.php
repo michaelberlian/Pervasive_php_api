@@ -15,7 +15,7 @@
   // Instantiate user object
   $user = new User($db);
 
-  // Get raw posted data
+  // Get user data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
@@ -24,10 +24,10 @@
   // Delete user
   if($user->delete()) {
     echo json_encode(
-      array('message' => 'Post Deleted')
+      array('message' => 'User Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'Post Not Deleted')
+      array('message' => 'User Not Deleted')
     );
   }

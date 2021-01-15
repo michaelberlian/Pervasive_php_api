@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 import asyncio
 from pywizlight.bulb import wizlight, PilotBuilder, discovery
+import requests
 
 GPIO.setwarnings(False) # Ignore warning for now
 GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
@@ -12,6 +13,45 @@ GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #MC-38 GPIO
 GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+
+while true:
+    print ("""
+Sign in / Sign up:
+    1. Sign in 
+    2. Sign up
+    3. exit    
+input:
+    """)
+    getInput = int(input())
+    if (getInput == 1){
+        username = input("username: ")
+        password = input("password: ")
+        url = 'http://18.140.7.137/Pervasive_php_api/api/user/read_single.php?username=' + username
+        password_real = requests.get(url).json()['password']
+        if (password == password_real){
+            user_id = requests.get(url).json()['id']
+        }
+        else {
+            print("wrong password")
+        }
+    } elif (getInput == 2){
+        username = input("username: ")
+        password = input("password: ")
+        url = 'http://18.140.7.137/Pervasive_php_api/api/user/create.php'
+        headers = {'Content-type': 'application/Json'}
+        myobj = """{
+                        "username":"{username}",
+                        "password":"{password}"
+                    }""".format(username,password)
+        userCreateRequests = requests.get(url, headers=headers, data = myobj)
+        print(userCreateRequests.json()['message'])
+        url = 'http://18.140.7.137/Pervasive_php_api/api/user/read_single.php?username=' + username
+        userId = requests.get(url).json()['id']
+        print ('your id is ', userId)
+    } elif (getInput == 3){
+        break;
+    }
 
 #Smart Lights local IP address
 light = wizlight("192.168.100.10")

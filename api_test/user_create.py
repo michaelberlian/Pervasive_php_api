@@ -1,11 +1,11 @@
 import requests
 
-url = 'http://18.140.7.137/Pervasive_php_api/api/setting/create.php'
+url = 'http://18.140.7.137/Pervasive_php_api/api/user/create.php'
 print (url)
 headers = {'Content-type': 'application/Json'}
 myobj = """{
-    "brightness":"100",
-    "switch":"on"
+    "username":"michael",
+    "password":"michael123"
 }"""
 
 x = requests.get(url, headers=headers, data = myobj)

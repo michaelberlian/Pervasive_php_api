@@ -6,7 +6,7 @@ headers = {'Content-type': 'application/Json'}
 myobj = """{
     "id":"1",
     "brightness":"128",
-    "switch":"1"
+    "switch":"0"
 }"""
 
 x = requests.post(url, headers=headers, data = myobj)
