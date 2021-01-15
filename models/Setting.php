@@ -7,7 +7,7 @@
     // Post Properties
     public $id;
     public $brightness;
-    public $function;
+    public $switch;
     public $created_at;
 
     // Constructor with DB
@@ -48,24 +48,24 @@
           // Set properties
           $this->id = $row['id'];
           $this->brightness = $row['brightness'];
-          $this->function = $row['function'];
+          $this->switch = $row['switch'];
     }
 
     // Create Post
     public function create() {
           // Create query
-          $query = 'INSERT INTO ' . $this->table . ' SET brightness = :brightness, function = :function';
+          $query = 'INSERT INTO ' . $this->table . ' SET brightness = :brightness, switch = :switch';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
       
           // Clean data
           $this->brightness = htmlspecialchars(strip_tags($this->brightness));
-          $this->function = htmlspecialchars(strip_tags($this->function));
+          $this->switch = htmlspecialchars(strip_tags($this->switch));
 
           // Bind data
           $stmt->bindParam(':brightness', $this->brightness);
-          $stmt->bindParam(':function', $this->function);
+          $stmt->bindParam(':switch', $this->switch);
 
           // Execute query
           if($stmt->execute()) {
@@ -82,19 +82,19 @@
     public function update() {
           // Create query
           $query = 'UPDATE ' . $this->table . '
-                                SET brightness = :brightness, function = :function WHERE id = :id';
+                                SET brightness = :brightness, switch = :switch WHERE id = :id';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
 
           // Clean data
           $this->brightness = htmlspecialchars(strip_tags($this->brightness));
-          $this->function = htmlspecialchars(strip_tags($this->function));
+          $this->switch = htmlspecialchars(strip_tags($this->switch));
           $this->id = htmlspecialchars(strip_tags($this->id));
 
           // Bind data
           $stmt->bindParam(':brightness', $this->brightness);
-          $stmt->bindParam(':function', $this->function);
+          $stmt->bindParam(':switch', $this->switch);
           $stmt->bindParam(':id', $this->id);
 
           // Execute query

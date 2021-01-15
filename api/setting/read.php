@@ -30,7 +30,7 @@
       $settings_item = array(
         'id' => $id,
         'brightness' => $brightness,
-        'function' => $function
+        'switch' => $switch
       );
 
       // Push to "data"

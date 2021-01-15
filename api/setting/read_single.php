@@ -22,7 +22,7 @@
   // Create array
   $setting_arr = array(
     'id' => $setting->id,
-    'brightness' => $setting->brightness,
+    'switch' => $setting->switch,
     'function' => $setting->function
   );
 

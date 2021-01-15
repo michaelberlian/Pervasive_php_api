@@ -19,7 +19,7 @@
     $data = json_decode(file_get_contents("php://input"));
 
     $setting->brightness = $data->brightness;
-    $setting->function = $data->function;
+    $setting->switch = $data->switch;
 
     // Create post
     if($setting->create()) {
