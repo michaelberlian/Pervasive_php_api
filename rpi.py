@@ -60,7 +60,7 @@ input:
         data = requests.get(url).json()
 
         #username is not used
-        if (data['message'] == "No Users Found") or not any(uName['username'] == username for uName in data):
+        if not(isinstance(data,list)) or not any(uName['username'] == username for uName in data):
             password = input("password: ")
 
             url = 'http://18.140.7.137/Pervasive_php_api/api/user/create.php'
@@ -82,9 +82,8 @@ input:
             url = 'http://18.140.7.137/Pervasive_php_api/api/setting/create.php'
             headers = {'Content-type': 'application/Json'}
             myobj = """{{
-                "id":{}
                 "brightness":"255",
-                "switch":"on"
+                "switch":"1"
             }}""".format(user_id)
             data = requests.get(url, headers=headers, data = myobj).json()
             print (data['message'])

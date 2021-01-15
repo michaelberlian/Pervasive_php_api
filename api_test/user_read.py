@@ -5,9 +5,10 @@ print (url)
 
 x = requests.get(url)
 data = x.json()
+print (data)
 
-username = "kevin"
-if (data['message'] == "No Users Found") or not any(uName['username'] == username for uName in data) or (data['message'] == 'No Users Found'):
+username = "michael"
+if  not (isinstance(data,list)) or not any(uName['username'] == username for uName in data) or (data['message'] == 'No Users Found'):
     print ("ga ada")
 else :
     print ("ada")
