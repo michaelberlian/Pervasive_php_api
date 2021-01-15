@@ -58,7 +58,7 @@ input:
         data = requests.get(url).json()
 
         #username is not used
-        if not any(uName['username'] == username for uName in data):
+        if (data['message'] == "No Users Found") or not any(uName['username'] == username for uName in data):
             password = input("password: ")
 
             url = 'http://18.140.7.137/Pervasive_php_api/api/user/create.php'
