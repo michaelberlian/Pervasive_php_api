@@ -77,7 +77,7 @@ input:
             print ('your id is ', user_id)
 
             #create the setting for new user
-            url = 'http://18.140.7.137/Pervasive_php_api/api/setting/create.php'\
+            url = 'http://18.140.7.137/Pervasive_php_api/api/setting/create.php'
             headers = {'Content-type': 'application/Json'}
             myobj = """{{
                 "id":{}
