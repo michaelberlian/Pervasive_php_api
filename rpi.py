@@ -15,7 +15,8 @@ GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
-while true:
+while True:
+    #  landing page login
     print ("""
 Sign in / Sign up:
     1. Sign in 
@@ -24,9 +25,13 @@ Sign in / Sign up:
 input:
     """)
     getInput = int(input())
+    # sign in
     if (getInput == 1):
+        #get input
         username = input("username: ")
         password = input("password: ")
+
+        #compare to db
         url = 'http://18.140.7.137/Pervasive_php_api/api/user/read_single.php?username=' + username
         password_real = requests.get(url).json()['password']
         if (password == password_real):
@@ -35,21 +40,39 @@ input:
             break
         else :
             print("wrong password")
+    # sign up
     elif (getInput == 2):
+
+        #get input
         username = input("username: ")
-        password = input("password: ")
-        url = 'http://18.140.7.137/Pervasive_php_api/api/user/create.php'
-        headers = {'Content-type': 'application/Json'}
-        myobj = """{{
-                        "username":"{}",
-                        "password":"{}"
-                    }}""".format(username,password)
-        userCreateRequests = requests.get(url, headers=headers, data = myobj)
-        print(userCreateRequests.json()['message'])
-        url = 'http://18.140.7.137/Pervasive_php_api/api/user/read_single.php?username=' + username
-        user_id = requests.get(url).json()['id']
-        print ('your id is ', user_id)
-        break
+
+        #check if username has been used
+        url = 'http://18.140.7.137/Pervasive_php_api/api/user/read.php'
+        data = requests.get(url).json()
+
+        #username is not used
+        if not any(uName['username'] == username for uName in data):
+            password = input("password: ")
+
+            url = 'http://18.140.7.137/Pervasive_php_api/api/user/create.php'
+            headers = {'Content-type': 'application/Json'}
+            myobj = """{{
+                            "username":"{}",
+                            "password":"{}"
+                        }}""".format(username,password)
+            userCreateRequests = requests.get(url, headers=headers, data = myobj)
+
+            print(userCreateRequests.json()['message'])
+
+            url = 'http://18.140.7.137/Pervasive_php_api/api/user/read_single.php?username=' + username
+            user_id = requests.get(url).json()['id']
+
+            print ('your id is ', user_id)
+            break
+        #username used
+        else :
+            print ("username has been used")
+    #exit
     elif (getInput == 3):
         exit()
 
