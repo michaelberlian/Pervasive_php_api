@@ -165,7 +165,7 @@ input:
 
 url = 'http://18.140.7.137/Pervasive_php_api/api/setting/read_single.php?id=' + user_id
 data = requests.get().json()
-brightness = data['brightness']
+brightness = int(data['brightness'])
 switch = int(data['switch'])
 
 #get settings
@@ -175,7 +175,6 @@ switch: {}
 """.format(brightness,switch))
 
 print("bye")
-exit()
 #Smart Lights local IP address
 light = wizlight("192.168.100.10")
 light2 = wizlight("192.168.100.11")
@@ -215,10 +214,10 @@ def button2_callback(channel):
     global switch
     if (switch):
         switch = False
-        print('function = off')
+        print('switch = off')
     else :
         switch = True
-        print('function = on')
+        print('switch = on')
 
     #update settings
     url = 'http://18.140.7.137/Pervasive_php_api/api/setting/update.php'
@@ -239,11 +238,8 @@ def button3_callback(channel):
 
 #set button state
 button_state = False
+#turn the lights on
 async def turnOnLights(light, light2, brightness_input):
-    #mode
-#    await light.turn_on(PilotBuilder(rgb = color))
-#    await light2.turn_on(PilotBuilder(rgb = color))
-    
     #brightness
     await light.turn_on(PilotBuilder(brightness = brightness_input))
     await light2.turn_on(PilotBuilder(brightness = brightness_input))
@@ -252,28 +248,18 @@ async def turnOffLights(light,light2):
     await light.turn_off()
     await light2.turn_off()
     
+#turn the lights off
 async def main():
-    #global button_state
-    #while True:# Run forever
-        #if GPIO.input(10) == GPIO.HIGH:
-           # print("Button was pushed!")
-          #  if button_state == False:
-         #       print("ON")
-        #        button_state = True
-       #         await light.turn_on(PilotBuilder(cold_white = (200)))
-      #          await light2.turn_on(PilotBuilder(cold_white = (200)))
-     #       else:
-    #            button_state = False
-   #             print("OFF")
-  #              await light.turn_off()
- #               await light2.turn_off()
-#            print("Action done")
+
     global brightness
     global lamp_state
     global function_state
     global turn
+
     prev_state = False
+
     while True:
+        #for the third button
         if turn:
             if (lamp_state):
                 print("turned off/turn")
@@ -285,6 +271,7 @@ async def main():
                 await turnOnLights(light, light2, brightness)
             turn = False
 
+        #for the magnet sensor
         if (prev_state != GPIO.input(7) and GPIO.input(7) == True and switch == True):
             print("door opened")
             if (lamp_state):
