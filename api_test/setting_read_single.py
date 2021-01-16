@@ -6,4 +6,7 @@ print (url)
 
 x = requests.get(url)
 data = x.json()
-print(data)
+
+if int(data['switch']):
+    print ('int')
+print(data['switch'])

@@ -161,6 +161,19 @@ input:
     elif (getInput == 5):
         exit()
 
+
+
+url = 'http://18.140.7.137/Pervasive_php_api/api/setting/read_single.php?id=' + user_id
+data = requests.get().json()
+brightness = data['brightness']
+switch = int(data['switch'])
+
+#get settings
+print ("""current Setting :
+Brightness: {}
+switch: {}
+""".format(brightness,switch))
+
 print("bye")
 exit()
 #Smart Lights local IP address
@@ -169,7 +182,6 @@ light2 = wizlight("192.168.100.11")
 
 # brightness = 255
 lamp_state = False
-# function_state = True
 turn = False
 
 def button1_callback(channel):
@@ -185,17 +197,39 @@ def button1_callback(channel):
     else :
         brightness = 1
 
+    #update settings
+    url = 'http://18.140.7.137/Pervasive_php_api/api/setting/update.php'
+    headers = {'Content-type': 'application/Json'}
+    myobj = """{{
+        "id":"{}",
+        "brightness":"{}",
+        "switch":"{}"
+    }}""".format(user_id,brightness,switch)
+    data = requests.post(url, headers=headers, data = myobj).json()
+    print(data['message'])
+
     print('brightness = ', brightness)
 
 
 def button2_callback(channel):
-    global function_state
-    if (function_state):
-        function_state = False
+    global switch
+    if (switch):
+        switch = False
         print('function = off')
     else :
-        function_state = True
+        switch = True
         print('function = on')
+
+    #update settings
+    url = 'http://18.140.7.137/Pervasive_php_api/api/setting/update.php'
+    headers = {'Content-type': 'application/Json'}
+    myobj = """{{
+        "id":"{}",
+        "brightness":"{}",
+        "switch":"{}"
+    }}""".format(user_id,brightness,switch)
+    data = requests.post(url, headers=headers, data = myobj).json()
+    print(data['message'])
 
 def button3_callback(channel):
     global turn
@@ -251,7 +285,7 @@ async def main():
                 await turnOnLights(light, light2, brightness)
             turn = False
 
-        if (prev_state != GPIO.input(7) and GPIO.input(7) == True and function_state == True):
+        if (prev_state != GPIO.input(7) and GPIO.input(7) == True and switch == True):
             print("door opened")
             if (lamp_state):
                 print("turned off")
