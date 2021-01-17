@@ -15,7 +15,7 @@ The Languange that was used to create the application is Python
 - Models folder
 - Api folder
 
-## for the Server, it is also necessary to have Mysql databases and table, the querry can be found in 
+## for the Server, it is also necessary to have Mysql databases and table, the querry can be found in:
 - Create the sql db and table
 
 ## for the API testing, they include: 
@@ -24,3 +24,6 @@ The Languange that was used to create the application is Python
 ## for the Application, they include:
 - rpi.py file
 
+---
+## Project Demo Video
+[NOT YET, SOON](https://drive.google.com/file/d/1xhwAvlqErUhWroH8n90PGuEBuu-GC1R6/view?usp=sharing)
