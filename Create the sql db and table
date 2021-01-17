@@ -1,0 +1,16 @@
+CREATE DATABASE fp_api;
+
+CREATE TABLE users (
+    id int NOT NULL AUTO_INCREMENT,
+    username varchar(255) NOT NULL,
+    password varchar(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE settings (
+    id int NOT NULL AUTO_INCREMENT,
+    brightness varchar(255) NOT NULL,
+    switch varchar(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
