@@ -36,6 +36,8 @@ input:
         #compare to db
         url = 'http://18.140.7.137/Pervasive_php_api/api/user/read_single.php?username=' + username
         password_real = requests.get(url).json()['password']
+
+        #verified
         if (password == password_real):
             user_id = requests.get(url).json()['id']
             print ('your id is ', user_id)
@@ -63,6 +65,7 @@ input:
         if not(isinstance(data,list)) or not any(uName['username'] == username for uName in data):
             password = input("password: ")
 
+            #create the new user
             url = 'http://18.140.7.137/Pervasive_php_api/api/user/create.php'
             headers = {'Content-type': 'application/Json'}
             myobj = """{{
@@ -145,7 +148,7 @@ input:
             data = requests.post(url, headers=headers, data = myobj).json()
             print (data['message'])
 
-
+            #delete setting
             url = 'http://18.140.7.137/Pervasive_php_api/api/setting/delete.php'
             headers = {'Content-type': 'application/Json'}
             myobj = """{{
@@ -174,12 +177,10 @@ Brightness: {}
 switch: {}
 """.format(brightness,switch))
 
-print("bye")
 #Smart Lights local IP address
 light = wizlight("192.168.100.10")
 light2 = wizlight("192.168.100.11")
 
-# brightness = 255
 lamp_state = False
 turn = False
 
@@ -236,8 +237,6 @@ def button3_callback(channel):
     print("button 3 turn true")
 
 
-#set button state
-button_state = False
 #turn the lights on
 async def turnOnLights(light, light2, brightness_input):
     #brightness

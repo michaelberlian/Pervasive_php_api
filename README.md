@@ -25,7 +25,7 @@ The Languange that was used to create the application is Python
 
 ## for the Application, they include:
 - rpi.py file
-- note : this file should be run on the raspberry pi with all the structure implemented, [can be seen here](https://cdn.discordapp.com/attachments/761987374665302073/800175268546871356/unknown.png) 
+- note : this file should be run on the raspberry pi with all the structure implemented, [can be seen here.](https://cdn.discordapp.com/attachments/761987374665302073/800175268546871356/unknown.png) 
 ---
 ## Note :
 the mysql database connection could be configured in Database.php file in Config folder
