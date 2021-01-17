@@ -25,5 +25,8 @@ The Languange that was used to create the application is Python
 - rpi.py file
 
 ---
+## Note :
+the mysql database connection could be configured in Database.php file in Config folder
+
 ## Project Demo Video
 [NOT YET, SOON](https://drive.google.com/file/d/1xhwAvlqErUhWroH8n90PGuEBuu-GC1R6/view?usp=sharing)
