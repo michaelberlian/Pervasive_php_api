@@ -14,16 +14,18 @@ The Languange that was used to create the application is Python
 - Config folder
 - Models folder
 - Api folder
+- note : all of this folder should be placed in the active directory of the server to run it
 
 ## for the Server, it is also necessary to have Mysql databases and table, the querry can be found in:
 - Create the sql db and table
 
 ## for the API testing, they include: 
 - api_test folder
+- note : this was created for testing and exploring purpose
 
 ## for the Application, they include:
 - rpi.py file
-
+- note : this file should be run on the raspberry pi with all the structure implemented [NOT YET, SOON](https://drive.google.com/file/d/1xhwAvlqErUhWroH8n90PGuEBuu-GC1R6/view?usp=sharing) 
 ---
 ## Note :
 the mysql database connection could be configured in Database.php file in Config folder
